@@ -21,7 +21,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: ./modules/frontend
+          context: modules/frontend
           platforms: linux/amd64
           tags: rfrodriguez/udaconnect-frontend:latest
 
