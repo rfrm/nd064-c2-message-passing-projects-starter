@@ -26,7 +26,6 @@ class Connection extends Component {
       )
         .then((response) => response.json())
         .then((connections) =>
-          connections.forEach(console.log)
           this.setState({
             connections: connections,
             personId: this.state.personId,
