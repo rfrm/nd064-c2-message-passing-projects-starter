@@ -26,6 +26,7 @@ class Connection extends Component {
       )
         .then((response) => response.json())
         .then((connections) =>
+          connections.forEach(console.log)
           this.setState({
             connections: connections,
             personId: this.state.personId,
@@ -40,7 +41,6 @@ class Connection extends Component {
         <div className="connectionHeader">Connections</div>
         <ul className="connectionList">
           {this.state.connections.filter((value, index, a) => a.findIndex(v => (
-              console.log(value, index, a)
               v.person.id === value.person.id
           )) === index).map((connection, index) => (
             <li className="connectionListItem" key={index}>
