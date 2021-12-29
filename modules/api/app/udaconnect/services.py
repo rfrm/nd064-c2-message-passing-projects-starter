@@ -2,15 +2,19 @@ import logging
 from datetime import datetime, timedelta
 from typing import Dict, List
 
+import os
+import msgpack
 from app import db
 from app.udaconnect.models import Connection, Location, Person
 from app.udaconnect.schemas import ConnectionSchema, LocationSchema, PersonSchema
 from geoalchemy2.functions import ST_AsText, ST_Point
 from sqlalchemy.sql import text
 
-logging.basicConfig(level=logging.WARNING)
-logger = logging.getLogger("udaconnect-api")
+from kafka import KafkaProducer
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("udaconnect-api")
+location_producer = KafkaProducer(bootstrap_servers=os.environ['KAFKA_SERVER'], value_serializer=msgpack.dumps)
 
 class ConnectionService:
     @staticmethod
@@ -109,6 +113,17 @@ class LocationService:
         db.session.commit()
 
         return new_location
+
+    @staticmethod
+    def create_async(location: Dict):
+        validation_results: Dict = LocationSchema().validate(location)
+        if validation_results:
+            logger.warning(f"Unexpected data format in payload: {validation_results}")
+            raise Exception(f"Invalid payload: {validation_results}")
+
+        location_producer.send('udaconnect-locations', location)
+        location_producer.flush()
+        logger.info("Published location to Kakfa")
 
 
 class PersonService:

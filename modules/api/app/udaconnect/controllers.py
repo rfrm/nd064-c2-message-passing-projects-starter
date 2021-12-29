@@ -37,6 +37,15 @@ class LocationResource(Resource):
         return location
 
 
+@api.route("/async/locations")
+class AsyncLocationResource(Resource):
+    @accepts(schema=LocationSchema)
+    def post(self):
+        LocationService.create_async(request.get_json())
+
+        return { 'OK': True } 
+
+
 @api.route("/persons")
 class PersonsResource(Resource):
     @accepts(schema=PersonSchema)
