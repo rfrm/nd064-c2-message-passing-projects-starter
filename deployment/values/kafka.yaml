@@ -1,0 +1,4 @@
+provisioning:
+  enabled: true
+  topics:
+    - name: udaconnect-locations
