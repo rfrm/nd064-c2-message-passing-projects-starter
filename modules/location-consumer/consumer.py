@@ -1,3 +1,4 @@
+import os
 import logging
 import msgpack
 from kafka import KafkaConsumer
