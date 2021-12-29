@@ -6,7 +6,7 @@ from app.models import Location
 from app.services import LocationService
 
 TOPIC_NAME = 'udaconnect-locations'
-consumer = KafkaConsumer(TOPIC_NAME, value_deserializer=msgpack.unpackb)
+consumer = KafkaConsumer(TOPIC_NAME, bootstrap_servers=os.environ['KAFKA_SERVER'], value_deserializer=msgpack.unpackb)
 
 for message in consumer:
     logging.info('Got location {}'.format(message.value))
