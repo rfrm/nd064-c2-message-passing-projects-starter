@@ -16,9 +16,16 @@ DATE_FORMAT = "%Y-%m-%d"
 
 api = Namespace("UdaConnect", description="Connections via geolocation.")  # noqa
 
+import os
+import grpc
+import logging
+import person_service_pb2
+import person_service_pb2_grpc
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("udaconnect-api")
 
 # TODO: This needs better exception handling
-
 
 @api.route("/locations")
 @api.route("/locations/<location_id>")
@@ -42,7 +49,6 @@ class AsyncLocationResource(Resource):
     @accepts(schema=LocationSchema)
     def post(self):
         LocationService.create_async(request.get_json())
-
         return { 'OK': True } 
 
 
@@ -52,7 +58,11 @@ class PersonsResource(Resource):
     @responds(schema=PersonSchema)
     def post(self) -> Person:
         payload = request.get_json()
-        new_person: Person = PersonService.create(payload)
+        with grpc.insecure_channel(os.environ['PERSON_GRPC']) as channel:
+            stub = person_service_pb2_grpc.PersonServiceStub(channel)
+            logging.info('Sending PersonCreation message')
+            new_person = stub.create(person_service_pb2.PersonCreation(**payload))
+            logging.info('New person created {}'.format(new_person))
         return new_person
 
     @responds(schema=PersonSchema, many=True)
