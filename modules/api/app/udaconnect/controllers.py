@@ -25,8 +25,6 @@ import person_service_pb2_grpc
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("udaconnect-api")
 
-# TODO: This needs better exception handling
-
 @api.route("/locations")
 @api.route("/locations/<location_id>")
 @api.param("location_id", "Unique ID for a given Location", _in="query")

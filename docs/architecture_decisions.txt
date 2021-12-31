@@ -1,6 +1,7 @@
-I created two new services:
+I created three new services:
 
 * location-consumer
+* location-grpc
 * person-grpc
 
 The location-consumer service responsibility is to consume vast amounts of
@@ -14,3 +15,5 @@ The person-grpc responsibility is to decrease the load on the API service by han
 person creation. The API service communicates with it via gRPC to guarantee fast data
 exchange.
 
+The location-grpc service provides a performant way for mobile apps to send their location
+data.
