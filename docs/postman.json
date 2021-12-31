@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "cb22a2dd-a8b1-4001-8af2-310fac2cbb6e",
+		"name": "Udaconnect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Person Async",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Robinson\",\n    \"last_name\": \"Rodriguez\",\n    \"company_name\": \"Handshake\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-url}}/api/persons",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"api",
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Person Sync",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Robinson\",\n    \"last_name\": \"Rodriguez\",\n    \"company_name\": \"Handshake\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-url}}/api/persons",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"api",
+						"persons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get connections",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api-url}}/api/persons/:personId/connection?start_date=2020-01-01&end_date=2020-12-30&distance=5",
+					"host": [
+						"{{api-url}}"
+					],
+					"path": [
+						"api",
+						"persons",
+						":personId",
+						"connection"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2020-01-01"
+						},
+						{
+							"key": "end_date",
+							"value": "2020-12-30"
+						},
+						{
+							"key": "distance",
+							"value": "5"
+						}
+					],
+					"variable": [
+						{
+							"key": "personId",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api-url",
+			"value": "localhost:30001"
+		}
+	]
+}

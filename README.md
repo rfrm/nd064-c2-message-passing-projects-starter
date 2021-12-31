@@ -150,3 +150,10 @@ Your architecture diagram should focus on the services and how they talk to one 
 ## Tips
 * We can access a running Docker container using `kubectl exec -it <pod_id> sh`. From there, we can `curl` an endpoint to debug network issues.
 * The starter project uses Python Flask. Flask doesn't work well with `asyncio` out-of-the-box. Consider using `multiprocessing` to create threads for asynchronous behavior in a standard Flask application.
+
+## How to run
+
+1. Install helm
+2. Install Kafka running `./scripts/install_kafka.sh`
+3. Install all services with `kubectl apply -f deployment/`
+4. Access http://localhost:30000/

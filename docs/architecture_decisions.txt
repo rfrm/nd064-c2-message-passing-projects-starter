@@ -1,0 +1,16 @@
+I created two new services:
+
+* location-consumer
+* person-grpc
+
+The location-consumer service responsibility is to consume vast amounts of
+real-time location events coming from Kafka and insert them in the Postgres database.
+
+Kafka acts as a scalable messaging queue capable of ingesting thousands of location 
+events per second coming from different places in the world. The architecture scales 
+by increasing the number of location-consumer instances and increasing topic partitions.
+
+The person-grpc responsibility is to decrease the load on the API service by handling all
+person creation. The API service communicates with it via gRPC to guarantee fast data
+exchange.
+
