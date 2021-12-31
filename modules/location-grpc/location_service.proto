@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+message Location {
+  int32 person_id = 1;
+  string latitude = 2;
+  string longitude = 3;
+  string creation_time = 4;
+}
+
+message SavedLocationStatus {
+  string status = 1;
+}
+
+service LocationService {
+  rpc RecordPersonLocation(Location) returns (SavedLocationStatus);
+}
