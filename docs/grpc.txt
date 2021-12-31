@@ -1,2 +1,3 @@
-See the api-service [sending](https://github.com/rfrm/nd064-c2-message-passing-projects-starter/blob/master/modules/api/app/udaconnect/controllers.py#L61) 
-a message to the person-grpc service.
+Run:
+
+LOCATION_GRPC=localhost:30002 python3 modules/location-grpc/send_location.py --person_id=8 --latitude=10.96854 --longitude=-74.78132 --creation_time=2020-12-28T20:02:49Z
